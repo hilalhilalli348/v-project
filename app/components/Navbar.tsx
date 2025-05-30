@@ -3,42 +3,39 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { 
-  MagnifyingGlassIcon, 
-  FunnelIcon, 
-  MapIcon,
-  HomeIcon,
-  TruckIcon,
-  DevicePhoneMobileIcon,
-  HomeModernIcon,
-  WrenchScrewdriverIcon,
-  CogIcon,
-  XMarkIcon,
-  MapPinIcon,
-  ChevronDownIcon,
-  Bars3Icon,
-  SunIcon,
-  MoonIcon,
-  CheckIcon,
-  EyeIcon,
-  EyeSlashIcon,
-  FireIcon,
-  SparklesIcon,
-  BuildingOfficeIcon,
-  BuildingOffice2Icon,
-  Square3Stack3DIcon,
-  CubeIcon,
-  SunIcon as VacationIcon,
-  TrashIcon,
-  DeviceTabletIcon,
-  ComputerDesktopIcon,
-  TvIcon,
-  ScissorsIcon,
-  BeakerIcon,
-  WrenchIcon,
-  CogIcon as PartsIcon,
-  UserIcon,
-  UserPlusIcon
-} from '@heroicons/react/24/outline';
+  Search,
+  Filter,
+  Map,
+  Home,
+  Truck,
+  Smartphone,
+  Building,
+  Wrench,
+  Settings,
+  X,
+  MapPin,
+  ChevronDown,
+  Menu,
+  Sun,
+  Moon,
+  Check,
+  Eye,
+  EyeOff,
+  TrendingUp,
+  Sparkles,
+  Building2,
+  Layers3,
+  Package,
+  Tablet,
+  Monitor,
+  Tv,
+  Scissors,
+  FlaskConical,
+  Hammer,
+  Cog,
+  User,
+  UserPlus
+} from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
@@ -70,86 +67,86 @@ const fullCategories: CategoryWithSubcategories[] = [
   { 
     id: 'emlak', 
     name: 'Emlak', 
-    icon: HomeIcon, 
+    icon: Home, 
     subcategories: [
-      { id: 'konut', name: 'Konut', icon: HomeIcon, filters: [
+      { id: 'konut', name: 'Konut', icon: Home, filters: [
         { id: 'oda-sayisi', name: 'Oda Sayısı', options: ['1+0', '1+1', '2+1', '3+1', '4+1', '5+1'] },
         { id: 'fiyat', name: 'Fiyat Aralığı' },
         { id: 'metrekare', name: 'Metrekare' }
       ]},
-      { id: 'is-yeri', name: 'İş Yeri', icon: BuildingOfficeIcon },
-      { id: 'arsa', name: 'Arsa', icon: Square3Stack3DIcon },
-      { id: 'bina', name: 'Bina', icon: BuildingOffice2Icon },
-      { id: 'devre-tatil', name: 'Devre Tatil', icon: VacationIcon },
+      { id: 'is-yeri', name: 'İş Yeri', icon: Building },
+      { id: 'arsa', name: 'Arsa', icon: Layers3 },
+      { id: 'bina', name: 'Bina', icon: Building2 },
+      { id: 'devre-tatil', name: 'Devre Tatil', icon: Sun },
     ]
   },
   { 
     id: 'vasita', 
     name: 'Vasıta', 
-    icon: TruckIcon, 
+    icon: Truck, 
     subcategories: [
-      { id: 'otomobil', name: 'Otomobil', icon: TruckIcon, filters: [
+      { id: 'otomobil', name: 'Otomobil', icon: Truck, filters: [
         { id: 'marka', name: 'Marka', options: ['Volkswagen', 'BMW', 'Mercedes', 'Audi', 'Toyota', 'Honda'] },
         { id: 'model', name: 'Model' },
         { id: 'yil', name: 'Model Yılı' },
         { id: 'km', name: 'Kilometre' }
       ]},
-      { id: 'arazi-suv-pickup', name: 'Arazi, SUV & Pick-up', icon: TruckIcon },
-      { id: 'minivan-panelvan', name: 'Minivan & Panelvan', icon: TruckIcon },
-      { id: 'motosiklet', name: 'Motosiklet', icon: CogIcon },
+      { id: 'arazi-suv-pickup', name: 'Arazi, SUV & Pick-up', icon: Truck },
+      { id: 'minivan-panelvan', name: 'Minivan & Panelvan', icon: Truck },
+      { id: 'motosiklet', name: 'Motosiklet', icon: Settings },
     ]
   },
   { 
     id: 'elektronik', 
     name: 'Elektronik', 
-    icon: DevicePhoneMobileIcon, 
+    icon: Smartphone, 
     subcategories: [
-      { id: 'cep-telefonu', name: 'Cep Telefonu', icon: DevicePhoneMobileIcon },
-      { id: 'bilgisayar', name: 'Bilgisayar', icon: ComputerDesktopIcon },
-      { id: 'tablet', name: 'Tablet', icon: DeviceTabletIcon },
-      { id: 'beyaz-esya', name: 'Beyaz Eşya', icon: CubeIcon },
-      { id: 'televizyon', name: 'Televizyon', icon: TvIcon },
+      { id: 'cep-telefonu', name: 'Cep Telefonu', icon: Smartphone },
+      { id: 'bilgisayar', name: 'Bilgisayar', icon: Monitor },
+      { id: 'tablet', name: 'Tablet', icon: Tablet },
+      { id: 'beyaz-esya', name: 'Beyaz Eşya', icon: Package },
+      { id: 'televizyon', name: 'Televizyon', icon: Tv },
     ]
   },
   { 
     id: 'ev-esyalari', 
     name: 'Ev Eşyaları', 
-    icon: HomeModernIcon, 
+    icon: Building, 
     subcategories: [
-      { id: 'mobilya', name: 'Mobilya', icon: CubeIcon },
-      { id: 'beyaz-esya', name: 'Beyaz Eşya', icon: CubeIcon },
-      { id: 'ev-tekstili', name: 'Ev Tekstili', icon: ScissorsIcon },
-      { id: 'mutfak-gerecleri', name: 'Mutfak Gereçleri', icon: BeakerIcon },
+      { id: 'mobilya', name: 'Mobilya', icon: Package },
+      { id: 'beyaz-esya', name: 'Beyaz Eşya', icon: Package },
+      { id: 'ev-tekstili', name: 'Ev Tekstili', icon: Scissors },
+      { id: 'mutfak-gerecleri', name: 'Mutfak Gereçleri', icon: FlaskConical },
     ]
   },
   { 
     id: 'is-makineleri', 
     name: 'İş Makineleri', 
-    icon: WrenchScrewdriverIcon, 
+    icon: Wrench, 
     subcategories: [
-      { id: 'insaat', name: 'İnşaat', icon: WrenchScrewdriverIcon },
-      { id: 'tarim', name: 'Tarım', icon: WrenchIcon },
-      { id: 'sanayi', name: 'Sanayi', icon: CogIcon },
-      { id: 'yedek-parca', name: 'Yedek Parça', icon: PartsIcon },
+      { id: 'insaat', name: 'İnşaat', icon: Wrench },
+      { id: 'tarim', name: 'Tarım', icon: Hammer },
+      { id: 'sanayi', name: 'Sanayi', icon: Settings },
+      { id: 'yedek-parca', name: 'Yedek Parça', icon: Cog },
     ]
   },
   { 
     id: 'yedek-parca', 
     name: 'Yedek Parça', 
-    icon: CogIcon, 
+    icon: Settings, 
     subcategories: [
-      { id: 'otomobil-yedek', name: 'Otomobil Yedek Parça', icon: TruckIcon },
-      { id: 'motosiklet-yedek', name: 'Motosiklet Yedek Parça', icon: CogIcon },
-      { id: 'is-makinesi-yedek', name: 'İş Makinesi Yedek Parça', icon: WrenchScrewdriverIcon },
-      { id: 'diger-yedek', name: 'Diğer Yedek Parça', icon: PartsIcon },
+      { id: 'otomobil-yedek', name: 'Otomobil Yedek Parça', icon: Truck },
+      { id: 'motosiklet-yedek', name: 'Motosiklet Yedek Parça', icon: Settings },
+      { id: 'is-makinesi-yedek', name: 'İş Makinesi Yedek Parça', icon: Wrench },
+      { id: 'diger-yedek', name: 'Diğer Yedek Parça', icon: Cog },
     ]
   }
 ];
 
 const categories: Category[] = [
-  { id: 'all', name: 'Tümü', icon: HomeIcon },
-  { id: 'cok-izlenenler', name: 'Çok İzlenenler', icon: FireIcon },
-  { id: 'yeni', name: 'Yeni', icon: SparklesIcon },
+  { id: 'all', name: 'Tümü', icon: Home },
+  { id: 'cok-izlenenler', name: 'Çok İzlenenler', icon: TrendingUp },
+  { id: 'yeni', name: 'Yeni', icon: Sparkles },
 ];
 
 const cities: string[] = [
@@ -440,42 +437,42 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
   return (
     <>
       {/* Main Navbar - Hidden when scrolled */}
-      <nav className={`fixed top-0 left-0 right-0 ${isDarkMode ? 'bg-zinc-900/95' : 'bg-white/95'} z-50 transition-all duration-300 ${
+      <nav className={`fixed top-0 left-0 right-0 ${isDarkMode ? 'bg-zinc-900/90' : 'bg-white/90'} backdrop-blur-md z-50 transition-all duration-300 ${
         isScrolled ? 'transform -translate-y-full' : ''
-      }`}>
+      } border-b ${isDarkMode ? 'border-zinc-800/40' : 'border-zinc-200/40'}`}>
         <div className="w-full max-w-6xl mx-auto px-4 md:px-12 lg:px-24 xl:px-0">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="flex items-center pl-[10px] md:pl-[10px]">
-                <span className={`font-light text-4xl ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>V</span>
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center space-x-8">
+              <Link href="/" className="flex items-center">
+                <span className={`font-light text-3xl ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>V</span>
               </Link>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Ara..."
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => setIsSearchFocused(false)}
-                    className={`${isDarkMode ? 'bg-zinc-800 text-white placeholder-zinc-400' : 'bg-zinc-100 text-zinc-900 placeholder-zinc-500'} rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-zinc-700' : 'focus:ring-zinc-200'} transition-all duration-300 ${
+                    className={`${isDarkMode ? 'bg-zinc-800/80 text-white placeholder-zinc-400' : 'bg-zinc-50/80 text-zinc-900 placeholder-zinc-500'} rounded-xl py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 ${isDarkMode ? 'focus:ring-zinc-600' : 'focus:ring-zinc-300'} transition-all duration-200 ${
                       isSearchFocused ? 'w-[300px]' : 'w-[200px]'
-                    }`}
+                    } backdrop-blur-sm`}
                   />
-                  <MagnifyingGlassIcon className={`h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
+                  <Search className={`h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
                 </div>
 
                 <div className="relative" ref={cityMenuRef}>
                   <button
                     onClick={() => setIsCityMenuOpen(!isCityMenuOpen)}
-                    className={`flex items-center space-x-1 ${isDarkMode ? 'bg-zinc-800 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-700 hover:text-zinc-900'} px-3 py-2 rounded-full transition-colors cursor-pointer hover:bg-[#155CFC] hover:text-white`}
+                    className={`flex items-center space-x-2 ${isDarkMode ? 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-700/80' : 'bg-zinc-50/60 text-zinc-700 hover:bg-zinc-100/80'} px-3 py-2 rounded-xl transition-all duration-200 cursor-pointer backdrop-blur-sm`}
                   >
-                    <MapPinIcon className="h-5 w-5" />
-                    <span className="text-sm">
+                    <MapPin className="h-4 w-4" />
+                    <span className="text-sm font-medium">
                       {selectedCities.length === 1 
                         ? selectedCities[0]
-                        : `${selectedCities.length} Şehir Seçildi`}
+                        : `${selectedCities.length} Şehir`}
                     </span>
-                    <ChevronDownIcon className="h-4 w-4" />
+                    <ChevronDown className="h-3 w-3" />
                   </button>
 
                   {isCityMenuOpen && (
@@ -485,8 +482,8 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 bg-black/30 z-40"
+                        transition={{ duration: 0.15 }}
+                        className="fixed inset-0 bg-black/20 z-40"
                         onClick={() => setIsCityMenuOpen(false)}
                       />
                       {/* Menu Panel */}
@@ -494,8 +491,8 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                         initial={{ x: "-100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "-100%" }}
-                        transition={{ type: "spring", damping: 20 }}
-                        className={`fixed left-0 top-0 h-screen w-96 ${isDarkMode ? 'bg-zinc-900' : 'bg-white'} shadow-lg z-50`}
+                        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                        className={`fixed left-0 top-0 h-screen w-96 ${isDarkMode ? 'bg-zinc-900/95' : 'bg-white/95'} backdrop-blur-md shadow-2xl z-50`}
                       >
                         <div className="flex flex-col h-full">
                           <div className={`flex items-center justify-between px-6 py-5 border-b ${isDarkMode ? 'border-zinc-800' : 'border-zinc-200'}`}>
@@ -512,7 +509,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                     : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                                 }`}
                               >
-                                <XMarkIcon className="h-6 w-6" />
+                                <X className="h-6 w-6" />
                               </button>
                             </div>
                           </div>
@@ -525,7 +522,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                   placeholder="Şehir ara..."
                                   className={`w-full ${isDarkMode ? 'bg-zinc-800 text-white placeholder-zinc-400' : 'bg-zinc-100 text-zinc-900 placeholder-zinc-500'} rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-zinc-700' : 'focus:ring-zinc-200'}`}
                                 />
-                                <MagnifyingGlassIcon className={`h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
+                                <Search className={`h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
                               </div>
 
                               {selectedCities.length > 0 && (
@@ -539,7 +536,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                           : 'text-zinc-600 hover:text-zinc-900'
                                       }`}
                                     >
-                                      <XMarkIcon className="h-4 w-4" />
+                                      <X className="h-4 w-4" />
                                       <span>Tümünü Temizle</span>
                                     </button>
                                   </div>
@@ -570,11 +567,11 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                       }`}
                                     >
                                       <div className="flex items-center space-x-3">
-                                        <MapPinIcon className="h-5 w-5" />
+                                        <MapPin className="h-5 w-5" />
                                         <span>{city}</span>
                                       </div>
                                       {selectedCities.includes(city) && (
-                                        <CheckIcon className="h-5 w-5" />
+                                        <Check className="h-5 w-5" />
                                       )}
                                     </button>
                                   ))}
@@ -589,36 +586,36 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
 
                 <button
                   onClick={() => setIsSearchMenuOpen(!isSearchMenuOpen)}
-                  className={`flex items-center space-x-1 ${isDarkMode ? 'bg-zinc-800 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-700 hover:text-zinc-900'} px-3 py-2 rounded-full transition-colors cursor-pointer hover:bg-[#155CFC] hover:text-white`}
+                  className={`flex items-center space-x-2 ${isDarkMode ? 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-700/80' : 'bg-zinc-50/60 text-zinc-700 hover:bg-zinc-100/80'} px-3 py-2 rounded-xl transition-all duration-200 cursor-pointer backdrop-blur-sm`}
                 >
-                  <MagnifyingGlassIcon className="h-5 w-5" />
-                  <span className="text-sm">Genel Arama</span>
+                  <Search className="h-4 w-4" />
+                  <span className="text-sm font-medium">Genel Arama</span>
                 </button>
               </div>
             </div>
 
             {/* Right side buttons and hamburger menu */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               {/* Giriş Yap and Kayıt Ol buttons (visible above lg) */}
-              <div className="hidden lg:flex items-center space-x-4">
+              <div className="hidden lg:flex items-center space-x-3">
                 <button
                   onClick={() => {
                     setIsLoginModalOpen(true);
                     setActiveTab('login');
                   }}
-                  className={`flex items-center space-x-1 ${isDarkMode ? 'bg-zinc-800 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-700 hover:text-zinc-900'} px-3 py-2 rounded-full transition-colors cursor-pointer text-sm hover:bg-[#155CFC] hover:text-white`}
+                  className={`flex items-center space-x-1.5 ${isDarkMode ? 'bg-zinc-800/60 text-zinc-300 hover:bg-zinc-700/80' : 'bg-zinc-50/60 text-zinc-700 hover:bg-zinc-100/80'} px-3 py-2 rounded-xl transition-all duration-200 cursor-pointer text-sm font-medium backdrop-blur-sm`}
                 >
-                  <UserIcon className="h-4 w-4" />
-                  <span>Giriş Yap</span>
+                  <User className="h-4 w-4" />
+                  <span>Giriş</span>
                 </button>
                 <button
                   onClick={() => {
                     setIsLoginModalOpen(true);
                     setActiveTab('register');
                   }}
-                  className={`flex items-center space-x-1 ${isDarkMode ? 'bg-zinc-800 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-700 hover:text-zinc-900'} px-3 py-2 rounded-full transition-colors cursor-pointer text-sm hover:bg-[#155CFC] hover:text-white`}
+                  className={`flex items-center space-x-1.5 ${isDarkMode ? 'bg-blue-600/80 text-white hover:bg-blue-500' : 'bg-blue-600 text-white hover:bg-blue-700'} px-3 py-2 rounded-xl transition-all duration-200 cursor-pointer text-sm font-medium backdrop-blur-sm`}
                 >
-                  <UserPlusIcon className="h-4 w-4" />
+                  <UserPlus className="h-4 w-4" />
                   <span>Kayıt Ol</span>
                 </button>
               </div>
@@ -632,7 +629,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                     : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                   }`}
                 >
-                  <Bars3Icon className="h-6 w-6" />
+                  <Menu className="h-6 w-6" />
                 </button>
 
                 <AnimatePresence>
@@ -667,9 +664,9 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                 }`}
                               >
                                 {isDarkMode ? (
-                                  <SunIcon className="h-6 w-6" />
+                                  <Sun className="h-6 w-6" />
                                 ) : (
-                                  <MoonIcon className="h-6 w-6" />
+                                  <Moon className="h-6 w-6" />
                                 )}
                               </button>
                               <button 
@@ -679,7 +676,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                   : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                                 }`}
                               >
-                                <XMarkIcon className="h-6 w-6" />
+                                <X className="h-6 w-6" />
                               </button>
                             </div>
                           </div>
@@ -696,7 +693,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                   }}
                                   className={`w-full text-left px-4 py-2 rounded-md transition-colors cursor-pointer flex items-center space-x-2 ${isDarkMode ? 'bg-zinc-800 text-white hover:bg-zinc-700' : 'bg-zinc-100 text-zinc-900 hover:bg-zinc-200'}`}
                                 >
-                                  <UserIcon className="h-4 w-4" />
+                                  <User className="h-4 w-4" />
                                   <span>Giriş Yap</span>
                                 </button>
                                 <button
@@ -707,7 +704,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                   }}
                                   className={`w-full text-left px-4 py-2 rounded-md transition-colors cursor-pointer flex items-center space-x-2 ${isDarkMode ? 'bg-zinc-800 text-white hover:bg-zinc-700' : 'bg-zinc-100 text-zinc-900 hover:bg-zinc-200'}`}
                                 >
-                                  <UserPlusIcon className="h-4 w-4" />
+                                  <UserPlus className="h-4 w-4" />
                                   <span>Kayıt Ol</span>
                                 </button>
                               </div>
@@ -727,8 +724,8 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
       </nav>
 
       {/* Category Bar - Always visible */}
-      <div className={`fixed left-0 right-0 ${isDarkMode ? 'bg-zinc-900/95' : 'bg-white/95'} border-b ${isDarkMode ? 'border-zinc-800' : 'border-zinc-200'} z-30 transition-all duration-300 ${
-        isScrolled ? 'top-0' : 'top-16'
+      <div className={`fixed left-0 right-0 ${isDarkMode ? 'bg-zinc-900/90' : 'bg-white/90'} backdrop-blur-md border-b ${isDarkMode ? 'border-zinc-800/40' : 'border-zinc-200/40'} z-30 transition-all duration-300 ${
+        isScrolled ? 'top-0' : 'top-14'
       }`}>
         <div className="w-full max-w-6xl mx-auto px-4 md:px-12 lg:px-24 xl:px-0">
           <div className="flex flex-col">
@@ -736,7 +733,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
             <div className={`flex items-center justify-between h-12 transition-all duration-300 ${
               isScrolled ? 'h-0 overflow-hidden' : ''
             }`}>
-              <div className="flex items-center space-x-6 overflow-x-auto scrollbar-hide xl:hidden">
+              <div className="flex items-center space-x-8 overflow-x-auto scrollbar-hide xl:hidden">
                 {categories.map((category) => (
                   <button
                     key={category.id}
@@ -744,16 +741,16 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                     className={`flex items-center space-x-2 text-sm whitespace-nowrap transition-colors cursor-pointer ${
                       selectedCategory === category.id
                         ? isDarkMode ? 'text-white' : 'text-zinc-900'
-                        : isDarkMode ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'
+                        : isDarkMode ? 'text-zinc-400 hover:text-zinc-200' : 'text-zinc-600 hover:text-zinc-800'
                     }`}
                   >
                     {category.icon && <category.icon className="h-4 w-4" />}
-                    <span>{category.name}</span>
+                    <span className="font-medium">{category.name}</span>
                   </button>
                 ))}
               </div>
 
-              <div className="hidden xl:flex items-center space-x-6 overflow-x-auto scrollbar-hide">
+              <div className="hidden xl:flex items-center space-x-8 overflow-x-auto scrollbar-hide">
                  {categories.map((category) => (
                    <button
                      key={category.id}
@@ -761,23 +758,23 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                      className={`flex items-center space-x-2 text-sm whitespace-nowrap transition-colors cursor-pointer ${
                        selectedCategory === category.id
                          ? isDarkMode ? 'text-white' : 'text-zinc-900'
-                         : isDarkMode ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'
+                         : isDarkMode ? 'text-zinc-400 hover:text-zinc-200' : 'text-zinc-600 hover:text-zinc-800'
                      }`}
                    >
                      {category.icon && <category.icon className="h-4 w-4" />}
-                     <span>{category.name}</span>
+                     <span className="font-medium">{category.name}</span>
                    </button>
                  ))}
                </div>
 
               <div className="flex items-center space-x-4">
-                <button className={`flex items-center space-x-1 text-sm cursor-pointer ${
+                <button className={`flex items-center space-x-1 text-sm cursor-pointer transition-colors ${
                   isDarkMode 
-                    ? 'text-zinc-400 hover:text-white' 
-                    : 'text-zinc-600 hover:text-zinc-900'
+                    ? 'text-zinc-400 hover:text-zinc-200' 
+                    : 'text-zinc-600 hover:text-zinc-800'
                 }`}>
-                  <MapIcon className="h-4 w-4" />
-                  <span>Haritadan Bak</span>
+                  <Map className="h-4 w-4" />
+                  <span className="font-medium">Haritadan Bak</span>
                 </button>
               </div>
             </div>
@@ -819,7 +816,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                             : 'text-zinc-600 hover:text-zinc-900'
                         }`}
                       >
-                        <ChevronDownIcon className="h-5 w-5 rotate-90" />
+                        <ChevronDown className="h-5 w-5 rotate-90" />
                       </button>
                     )}
                     <h3 className={`text-base font-medium ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
@@ -838,7 +835,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                           : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                       }`}
                     >
-                      <XMarkIcon className="h-6 w-6" />
+                      <X className="h-6 w-6" />
                     </button>
                   </div>
                 </div>
@@ -849,27 +846,27 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                       <>
                         {/* Selected Items Display */}
                         {selectedSearchItems.length > 0 && (
-                          <div className={`mb-4 p-3 rounded-lg ${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-100'}`}>
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className={`text-sm font-medium ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Seçilenler:</h4>
+                          <div className={`mb-6 p-4 rounded-xl ${isDarkMode ? 'bg-zinc-800/50' : 'bg-zinc-50/50'} backdrop-blur-sm border ${isDarkMode ? 'border-zinc-700/50' : 'border-zinc-200/50'}`}>
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className={`text-sm font-medium ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>Seçilenler</h4>
                               <button
                                 onClick={() => setSelectedSearchItems([])}
-                                className={`text-xs transition-colors flex items-center space-x-1 cursor-pointer ${isDarkMode ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'}`}
+                                className={`text-xs transition-colors flex items-center space-x-1 cursor-pointer ${isDarkMode ? 'text-zinc-400 hover:text-zinc-200' : 'text-zinc-600 hover:text-zinc-800'}`}
                               >
-                                 <XMarkIcon className="h-3 w-3" />
-                                <span>Tümünü Temizle</span>
+                                 <X className="h-3 w-3" />
+                                <span>Temizle</span>
                               </button>
                             </div>
                             <div className="flex flex-wrap gap-2">
                               {selectedSearchItems.map((item) => (
                                 <div
                                   key={item}
-                                  className={`flex items-stretch rounded-full overflow-hidden ${isDarkMode ? 'bg-zinc-700' : 'bg-zinc-200'}`}
+                                  className={`flex items-stretch rounded-lg overflow-hidden ${isDarkMode ? 'bg-zinc-700/80' : 'bg-zinc-100/80'} backdrop-blur-sm`}
                                 >
                                   <span 
                                     onClick={() => canItemHaveFilters(item) && openFilterSettingsForItem(item)}
-                                    className={`px-3 py-1.5 text-sm ${isDarkMode ? 'text-white' : 'text-zinc-800'} ${
-                                      canItemHaveFilters(item) ? 'cursor-pointer hover:bg-opacity-20 hover:bg-gray-500 transition-colors' : ''
+                                    className={`px-3 py-2 text-sm ${isDarkMode ? 'text-white' : 'text-zinc-800'} ${
+                                      canItemHaveFilters(item) ? 'cursor-pointer hover:bg-zinc-600/50 transition-colors' : ''
                                     }`}
                                     title={canItemHaveFilters(item) ? "Filtre ayarları" : ""}
                                   >
@@ -880,10 +877,10 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                       e.stopPropagation();
                                       removeSelectedSearchItem(item);
                                     }}
-                                    className={`px-2 h-full cursor-pointer transition-colors flex items-center ${isDarkMode ? 'hover:bg-red-600 text-zinc-400 hover:text-white' : 'hover:bg-red-500 text-zinc-600 hover:text-white'}`}
+                                    className={`px-2 h-full cursor-pointer transition-colors flex items-center ${isDarkMode ? 'hover:bg-red-500/80 text-zinc-400 hover:text-white' : 'hover:bg-red-500/80 text-zinc-600 hover:text-white'}`}
                                     title="Kaldır"
                                   >
-                                    <XMarkIcon className="h-3 w-3" />
+                                    <X className="h-3 w-3" />
                                   </button>
                                 </div>
                               ))}
@@ -897,7 +894,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                             placeholder="Ne aramıştınız?"
                             className={`w-full ${isDarkMode ? 'bg-zinc-800 text-white placeholder-zinc-400' : 'bg-zinc-100 text-zinc-900 placeholder-zinc-500'} rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-zinc-700' : 'focus:ring-zinc-200'}`}
                           />
-                          <MagnifyingGlassIcon className={`h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
+                          <Search className={`h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`} />
                         </div>
 
                         {/* Category and Subcategory List */}
@@ -906,10 +903,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                           <div className="space-y-1">
                             {fullCategories.map((category) => (
                               <div key={category.id}>
-                                <button
-                                  onClick={() => handleSearchCategoryClick(category.id, category.name)}
-                                  onMouseEnter={() => setHoveredCategory(category.id)}
-                                  onMouseLeave={() => setHoveredCategory(null)}
+                                <div
                                   className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium cursor-pointer flex items-center justify-between group ${
                                     expandedCategory === category.id
                                       ? isDarkMode 
@@ -919,17 +913,22 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                         ? 'text-zinc-300 hover:bg-zinc-800 hover:text-white' 
                                         : 'text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900'
                                   }`}
+                                  onMouseEnter={() => setHoveredCategory(category.id)}
+                                  onMouseLeave={() => setHoveredCategory(null)}
                                 >
-                                  <div className="flex items-center space-x-2">
+                                  <div 
+                                    className="flex items-center space-x-2 flex-1"
+                                    onClick={() => handleSearchCategoryClick(category.id, category.name)}
+                                  >
                                     {category.icon && <category.icon className="h-4 w-4" />}
                                     <span>{category.name}</span>
                                   </div>
-                                  <button
+                                  <div
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       handleSelectAll(category.name);
                                     }}
-                                    className={`text-xs px-2 py-1 rounded-md cursor-pointer ${
+                                    className={`text-xs px-2 py-1 rounded-md cursor-pointer transition-colors ${
                                       hoveredCategory === category.id ? 'opacity-100' : 'opacity-0'
                                     } ${
                                       isDarkMode 
@@ -938,32 +937,34 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                     }`}
                                   >
                                     Hepsi
-                                  </button>
-                                </button>
+                                  </div>
+                                </div>
                                 {category.subcategories && expandedCategory === category.id && (
                                   <div className="ml-4 mt-1 space-y-1">
                                     {category.subcategories.map((subcategory) => (
-                                      <button
+                                      <div
                                         key={subcategory.id}
-                                        onClick={() => handleSearchSubcategoryClick(subcategory.id, subcategory.name)}
-                                        onMouseEnter={() => setHoveredSubcategory(subcategory.id)}
-                                        onMouseLeave={() => setHoveredSubcategory(null)}
                                         className={`w-full text-left px-3 py-2 rounded-lg text-sm cursor-pointer flex items-center justify-between ${
                                           isDarkMode 
                                             ? 'text-zinc-400 hover:bg-zinc-800 hover:text-white' 
                                             : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
                                         }`}
+                                        onMouseEnter={() => setHoveredSubcategory(subcategory.id)}
+                                        onMouseLeave={() => setHoveredSubcategory(null)}
                                       >
-                                        <div className="flex items-center space-x-2">
+                                        <div 
+                                          className="flex items-center space-x-2 flex-1"
+                                          onClick={() => handleSearchSubcategoryClick(subcategory.id, subcategory.name)}
+                                        >
                                           {subcategory.icon && <subcategory.icon className="h-4 w-4" />}
                                           <span>{subcategory.name}</span>
                                         </div>
-                                        <button
+                                        <div
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             handleSelectAll(subcategory.name);
                                           }}
-                                          className={`text-xs px-2 py-1 rounded-md cursor-pointer ${
+                                          className={`text-xs px-2 py-1 rounded-md cursor-pointer transition-colors ${
                                             hoveredSubcategory === subcategory.id ? 'opacity-100' : 'opacity-0'
                                           } ${
                                             isDarkMode 
@@ -972,8 +973,8 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                                           }`}
                                         >
                                           Hepsi
-                                        </button>
-                                      </button>
+                                        </div>
+                                      </div>
                                     ))}
                                   </div>
                                 )}
@@ -1088,7 +1089,7 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                         : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
                     }`}
                   >
-                    <XMarkIcon className="h-6 w-6" />
+                    <X className="h-6 w-6" />
                   </button>
                 </div>
 
@@ -1167,9 +1168,9 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                               }`}
                             >
                               {showLoginPassword ? (
-                                <EyeSlashIcon className="h-5 w-5" />
+                                <EyeOff className="h-5 w-5" />
                               ) : (
-                                <EyeIcon className="h-5 w-5" />
+                                <Eye className="h-5 w-5" />
                               )}
                             </button>
                           </div>
@@ -1267,9 +1268,9 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                               }`}
                             >
                               {showRegisterPassword ? (
-                                <EyeSlashIcon className="h-5 w-5" />
+                                <EyeOff className="h-5 w-5" />
                               ) : (
-                                <EyeIcon className="h-5 w-5" />
+                                <Eye className="h-5 w-5" />
                               )}
                             </button>
                           </div>
@@ -1302,9 +1303,9 @@ export default function Navbar({ onCategoryChange }: NavbarProps) {
                               }`}
                             >
                               {showConfirmPassword ? (
-                                <EyeSlashIcon className="h-5 w-5" />
+                                <EyeOff className="h-5 w-5" />
                               ) : (
-                                <EyeIcon className="h-5 w-5" />
+                                <Eye className="h-5 w-5" />
                               )}
                             </button>
                           </div>

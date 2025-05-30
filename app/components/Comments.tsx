@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChatBubbleLeftIcon, PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { MessageCircle, Send, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 interface Comment {
@@ -80,7 +80,7 @@ export default function Comments({ postId, isOpen, onClose }: CommentsProps) {
                 onClick={onClose}
                 className={`${isDarkMode ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'} p-2 rounded-full`}
               >
-                <XMarkIcon className="h-6 w-6" />
+                <X className="h-6 w-6" />
               </button>
             </div>
 
@@ -120,7 +120,7 @@ export default function Comments({ postId, isOpen, onClose }: CommentsProps) {
                   type="submit"
                   className="bg-white/10 text-white p-2 rounded-full hover:bg-white/20 transition-colors"
                 >
-                  <PaperAirplaneIcon className="h-5 w-5" />
+                  <Send className="h-5 w-5" />
                 </button>
               </div>
             </form>
